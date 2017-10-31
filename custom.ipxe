@@ -38,7 +38,7 @@ set util_path 192.168.1.120/images/cd140201.zip
 set util_file cd140201.zip
 echo memdisk_version_request
 echo ${memdisk}
-sleep 5
+sleep 10
 goto custom_exit
 
 # Boot an ISO raw file using the memdisk kernel:

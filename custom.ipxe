@@ -3,11 +3,6 @@
 ### netboot.xyz-custom menu
 ###
 
-# :start
-# echo Hello world!
-# sleep 10
-# goto custom_exit
-
 :custom
 clear custom_choice
 menu TSC LAN Boot Server
@@ -37,15 +32,6 @@ echo
 echo MD5sums:
 md5sum memdisk ${util_file}
 goto skip_sigs
-
-# Verify checksums and file signatures:
-:verify_sigs
-echo
-echo Checking signatures...
-imgverify memdisk ${sigs}memdisk.sig || goto error
-imgverify ${util_file} ${sigs}${menu}/${util_file}.sig || goto error
-echo Signatures verified!
-echo
 
 # Skip verification of checksums and file signatures:
 :skip_sigs

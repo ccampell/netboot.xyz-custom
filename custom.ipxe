@@ -40,6 +40,7 @@ goto boot_memdisk
 
 # Boot an ISO raw file using the memdisk kernel:
 :boot_memdisk
+echo ${memdisk}
 imgfree
 kernel ${memdisk} iso raw
 initrd --name ${util_file} http://${util_path}

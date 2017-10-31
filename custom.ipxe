@@ -39,7 +39,7 @@ set util_file cd140201.zip
 echo ${memdisk}
 sleep 5
 initrd --name ${util_file} http://${util_path}
-chain ${memdisk} iso raw
+chain ${memdisk} iso raw || goto failed
 goto custom_exit
 
 # Boot an ISO raw file using the memdisk kernel:
@@ -67,6 +67,17 @@ boot || goto custom_exit
 :option_three
 echo Chains into another menu...
 chain https://raw.githubusercontent.com/${github_user}/netboot.xyz-custom/master/custom1.ipxe || goto custom
+
+:shell
+echo Type 'exit' to get the back to the menu
+shell
+set menu-timeout 0
+set submenu-timeout 0
+goto custom
+
+:failed
+echo Booting failed, dropping to shell
+goto shell
 
 :custom_exit
 exit 0

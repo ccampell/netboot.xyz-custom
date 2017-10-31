@@ -3,6 +3,13 @@
 ### netboot.xyz-custom menu
 ###
 
+:global_vars
+# set boot domain
+set boot_domain boot.netboot.xyz
+
+# set location of memdisk
+set memdisk http://${boot_domain}/memdisk
+
 :custom
 clear custom_choice
 menu TSC LAN Boot Server

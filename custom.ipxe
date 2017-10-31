@@ -36,9 +36,10 @@ goto boot_memdisk
 :pogostick
 set util_path 192.168.1.120/images/cd140201.zip
 set util_file cd140201.zip
-echo memdisk_version_request
 echo ${memdisk}
-sleep 10
+sleep 5
+initrd --name ${util_file} http://${util_path}
+chain ${memdisk} iso raw
 goto custom_exit
 
 # Boot an ISO raw file using the memdisk kernel:

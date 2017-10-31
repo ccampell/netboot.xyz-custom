@@ -8,6 +8,7 @@ clear custom_choice
 menu TSC LAN Boot Server
 item --gap Utilities
 item ubcd ${space} Ultimate Boot CD (UBCD)
+item pogostick ${space} Pogostick - Offline Windows Password and Registry Editor
 item option_one ${space} Loading a kernel and initrd
 item option_two ${space} Loading an ISO
 item --gap This is a second sub menu
@@ -18,9 +19,16 @@ echo ${cls}
 goto ${custom_choice}
 goto custom_exit
 
+# Boot the Ultimate Boot CD (UBCD)
 :ubcd
 set util_path 192.168.1.120/images/ubcd537.iso
 set util_file ubcd537.iso
+goto boot_memdisk
+
+# Boot Pogostick (windows password and registry editor)
+:pogostick
+set util_path 192.168.1.120/images/cd140201.zip
+set util_file cd140201.zip
 goto boot_memdisk
 
 # Boot an ISO raw file using the memdisk kernel:

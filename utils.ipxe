@@ -1,0 +1,42 @@
+#!ipxe
+###
+### netboot.xyz-custom menu: Serves iso's from LAN instead of remote mirror.
+### Author: Chris Campell
+###
+
+menu Utilities
+item --gap Utilities:
+item ubcd ${space} Ultimate Boot CD (UBCD)
+
+:ubcd
+set util_path 192.168.1.120/images/ubcd537.iso
+set util_file ubcd537.iso
+goto boot_memdisk
+
+:boot_memdisk
+imgfree
+kernel ${memdisk} iso raw
+initrd --name ${util_file} http://${util_path}
+echo
+echo MD5sums:
+md5sum memdisk ${util_file}
+iseq ${img_sigs_enabled} true && goto verify_sigs || goto skip_sigs
+
+# Verify checksums and file signatures:
+:verify_sigs
+echo
+echo Checking signatures...
+imgverify memdisk ${sigs}memdisk.sig || goto error
+imgverify ${util_file} ${sigs}${menu}/${util_file}.sig || goto error
+echo Signatures verified!
+echo
+
+# Skip verification of checksums and file signatures:
+:skip_sigs
+boot
+goto utils_exit
+
+# Exit the utilities menu:
+:utils_exit
+clear menu
+exit 0

@@ -36,7 +36,7 @@ initrd --name ${util_file} http://${util_path}
 echo
 echo MD5sums:
 md5sum memdisk ${util_file}
-iseq ${img_sigs_enabled} true && goto verify_sigs || goto skip_sigs
+goto skip_sigs
 
 # Verify checksums and file signatures:
 :verify_sigs
